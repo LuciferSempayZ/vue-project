@@ -1,0 +1,9 @@
+@import './base.css';
+
+
+a,
+.green {
+  text-decoration: none;
+  color: hsl(70, 50%, 35%);
+  transition: 0.4s;
+}

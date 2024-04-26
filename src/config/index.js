@@ -1,0 +1,1 @@
+export const API_URL = 'http://strekolovskii-av.tepk-it.ru/api'

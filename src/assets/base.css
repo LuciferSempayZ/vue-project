@@ -1,0 +1,18 @@
+/* Стили для светлой темы по умолчанию */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+/* Стили для темной темы */
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
+/* Применение переменных темы */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+html {
+  scroll-behavior: smooth; /* Это применит плавный скроллинг ко всей странице */
+}
