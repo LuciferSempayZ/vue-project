@@ -4,6 +4,7 @@ import SliderPhotoPizza from '@/components/SliderPhotoPizza.vue';
 import About from "@/components/About.vue";
 import Authorization from "@/components/Authorization.vue";
 import Registration from "@/components/Registration.vue";
+import Profile from "@/components/Profile.vue";
 // Объявляем маршруты
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/registration',
     name: 'Registration',
     component: Registration,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   }
   // Другие маршруты
 ];

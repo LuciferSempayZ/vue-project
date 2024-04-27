@@ -1,7 +1,7 @@
 <template>
   <Title/>
   <About id="about"/>
-  <Assortiment/>
+  <Assortiment id="pizza-block"/>
   <Reviews/>
   <SliderPhotoPizza id="gallery"/>
   <Footer/>

@@ -46,7 +46,9 @@ const onSubmit = async () => {
   setToken?.(data?.token)
   await router.push({ name: 'home' })
 }
-
+// const enter = async () => {
+//   router.push('/Profile'); // Перенаправляем на страницу входа или главную
+// };
 const onInputChange = (field, event) => {
   const value = event.target.value
 
@@ -85,7 +87,7 @@ const onInputChange = (field, event) => {
             @change="(event) => onInputChange('password', event)"
         />
 
-        <Button @submit.prevent="onSubmit" type="submit">Войти</Button>
+        <Button @submit.prevent="onSubmit" @click="enter" type="submit">Войти</Button>
       </template>
     </Form>
   </main>

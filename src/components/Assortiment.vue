@@ -14,7 +14,7 @@ const popularPizzas = ref([
 </script>
 
 <template>
-  <div class="popular-pizzas">
+  <div id="pizza-block" class="popular-pizzas">
     <h2>Популярные пиццы</h2>
     <div class="pizza-list">
       <div class="pizza-item" v-for="pizza in popularPizzas" :key="pizza.id">
