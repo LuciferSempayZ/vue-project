@@ -34,10 +34,10 @@ export default {
     <h1>Продукты</h1>
     <div class="slides" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <div v-for="product in products" :key="product.id" class="slide">
-        <img :src="getProductPhoto(product.photo_id)" alt="" class="product-image">
+        <img :src="getProductPhoto(product.photo_id)" alt="pizza-photo" class="product-image">
         <div class="review-pizza">
           <h3>{{ product.name }}</h3>
-          <p>Цена: {{ product.price }}</p>
+          <p>Цена: {{ product.price }}₽ </p>
           <blockquote><p>{{ product.description }}</p></blockquote>
         </div>
       </div>

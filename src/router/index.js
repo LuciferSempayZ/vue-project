@@ -36,7 +36,12 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
-  }
+  },
+  {
+    path: '/category/:categoryId',
+    name: 'ProductCategory',
+    component: ProductCategory,
+  },
   // Другие маршруты
 ];
 
