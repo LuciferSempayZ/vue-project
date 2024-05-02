@@ -5,6 +5,7 @@ import About from "@/components/About.vue";
 import Authorization from "@/components/Authorization.vue";
 import Registration from "@/components/Registration.vue";
 import Profile from "@/components/Profile.vue";
+import ProductCategory from "@/components/ProductCategories.vue";
 // Объявляем маршруты
 const routes = [
   {
@@ -38,7 +39,7 @@ const routes = [
     component: Profile,
   },
   {
-    path: '/category/:categoryId',
+    path: '/categories/:categoryId',
     name: 'ProductCategory',
     component: ProductCategory,
   },
@@ -51,13 +52,18 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth', // Плавный скроллинг
-      };
+      // Проверка, что элемент существует
+      const target = document.querySelector(to.hash);
+      if (target) {
+        return {
+          el: target,
+          behavior: 'smooth', // Плавный скроллинг
+        };
+      }
     }
     return savedPosition || { top: 0, behavior: 'smooth' };
   },
 });
+
 
 export default router; // Экспортируем один раз

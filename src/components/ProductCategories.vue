@@ -1,30 +1,25 @@
-<script>
-import { ref, onMounted } from 'vue';
-import { GetCategoryAndProducts } from '@/api/methods/categoryProducts/GetCategoryAndProducts.js'; // Метод для загрузки продуктов по категории
+<script setup>
+import {onMounted, ref} from 'vue';
+import { getCategory } from '@/api/methods/categoryProducts/GetCategory.js'; // Метод для загрузки категорий
 
-export default {
-  data() {
-    return {
-      products: [],
-    };
-  },
-  async created() {
-    const categoryId = this.$route.params.categoryId; // Получаем ID категории из URL
-    this.products = await GetCategoryAndProducts(categoryId); // Загружаем продукты по категории
-  },
-};
+const categories = ref([]);
+onMounted(async () => {
+  try {
+    categories.value = await getCategory();
+  } catch (error) {
+    console.error('ОАОАОА', error)
+  }
+});
 </script>
 
 <template>
   <div>
-    <h1>Продукты категории {{ this.$route.params.categoryId }}</h1>
+    <h1>Категории продуктов</h1>
     <ul>
-      <!-- Отображаем продукты этой категории -->
-      <li v-for="product in products" :key="product.id">
-        <h3>{{ product.name }}</h3>
-        <p>Цена: {{ product.price }}</p>
-        <p>{{ product.description }}</p>
-      </li>
+        <!-- Ссылки на продукты по категориям -->
+        <li v-for="category in categories" :key="category.id">
+          <RouterLink :to="`/categories/${category.id}`">{{ category.name }}</RouterLink> <!-- Ссылка на продукты по категории -->
+        </li>
     </ul>
   </div>
 </template>

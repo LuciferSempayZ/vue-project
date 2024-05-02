@@ -1,6 +1,7 @@
 <script>
 import { ref } from 'vue';
 import { getProducts, getProductPhotos } from '@/api/methods/categoryProducts/GetCategoryAndProducts.js';
+import { URL_PHOTO} from "@/config/index.js";
 
 export default {
   data() {
@@ -15,9 +16,8 @@ export default {
     this.photos = await getProductPhotos();
   },
   methods: {
-    getProductPhoto(photoId) {
-      const photo = this.photos.find(photo => photo.id === photoId);
-      return photo ? 'http://strekolovskii-av.tepk-it.ru/public/storage/' + photo.path : '/path/to/default/image.jpg';
+    URL_PHOTO() {
+      return URL_PHOTO
     },
     nextSlide() {
       this.currentSlide = (this.currentSlide + 1) % this.products.length; // Переход к следующему слайду
@@ -27,6 +27,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <template>
@@ -34,7 +35,7 @@ export default {
     <h1>Продукты</h1>
     <div class="slides" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <div v-for="product in products" :key="product.id" class="slide">
-        <img :src="getProductPhoto(product.photo_id)" alt="pizza-photo" class="product-image">
+        <img :src="URL_PHOTO() + product.photo" alt="pizza-photo" class="product-image">
         <div class="review-pizza">
           <h3>{{ product.name }}</h3>
           <p>Цена: {{ product.price }}₽ </p>

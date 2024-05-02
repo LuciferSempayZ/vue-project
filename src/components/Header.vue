@@ -32,17 +32,16 @@ watch(theme, (newTheme) => {
       </select>
         <RouterLink to="/">Главная</RouterLink>
         <RouterLink to="/#about">О нас</RouterLink>
-        <RouterLink to="/category">Категории</RouterLink>
+        <RouterLink to="/#category">Категории</RouterLink>
         <RouterLink to="/#pizza-block">Продукты</RouterLink>
         <RouterLink to="/#gallery">Галерея</RouterLink>
-        <RouterLink to="/basket">Корзина</RouterLink>
-        <RouterLink to="/Profile">Профиль</RouterLink>
+<!--        <RouterLink to="/basket">Корзина</RouterLink>-->
+        <RouterLink to="/profile">Профиль</RouterLink>
         <div class="auth-buttons">
           <RouterLink to="/Authorization"><button class="auth-button login-button">Войти</button></RouterLink>
           <RouterLink to="/Registration"><button class="auth-button register-button">Регистрация</button></RouterLink>
         </div>
       </nav>
-
     </div>
   </header>
 </template>

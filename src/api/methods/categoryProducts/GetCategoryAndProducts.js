@@ -20,3 +20,6 @@ export const getProductPhotos = async () => {
 
     return response.json(); // Конвертация ответа в JSON
 };
+
+
+
