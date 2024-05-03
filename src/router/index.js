@@ -5,7 +5,8 @@ import About from "@/components/About.vue";
 import Authorization from "@/components/Authorization.vue";
 import Registration from "@/components/Registration.vue";
 import Profile from "@/components/Profile.vue";
-import ProductCategory from "@/components/ProductCategories.vue";
+import CategoryList from "@/components/CategoryList.vue";
+import ProductCategories from "@/components/ProductCategories.vue";
 // Объявляем маршруты
 const routes = [
   {
@@ -38,12 +39,22 @@ const routes = [
     name: 'Profile',
     component: Profile,
   },
+  // {
+  //   path: '/category/:categoryId',
+  //   name: 'ProductCategories',
+  //   component: ProductCategories,
+  // },
   {
-    path: '/categories/:categoryId',
-    name: 'ProductCategory',
-    component: ProductCategory,
+    path: '/products/category/:categoryId',
+    name: 'ProductCategories',
+    component: CategoryList,
   },
-  // Другие маршруты
+   {
+     path: '/category/:id', // Маршрут с параметром категории
+     name: 'CategoryList',
+     component: CategoryList,
+     props: true, // Передача параметра в качестве свойства компонента
+   },
 ];
 
 // Создаём экземпляр маршрутизатора

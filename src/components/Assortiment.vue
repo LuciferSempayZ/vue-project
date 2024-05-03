@@ -35,6 +35,11 @@ export default {
     <h1>Продукты</h1>
     <div class="slides" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <div v-for="product in products" :key="product.id" class="slide">
+        <!-- Проверка на "новый" или "хит продаж" -->
+        <div class="product-labels">
+          <span v-if="product.new === 1" class="new-label">Новый</span>
+          <span v-if="product.bestseller === 1" class="bestseller-label">Хит продаж</span>
+        </div>
         <img :src="URL_PHOTO() + product.photo" alt="pizza-photo" class="product-image">
         <div class="review-pizza">
           <h3>{{ product.name }}</h3>
@@ -48,6 +53,7 @@ export default {
     <button @click="nextSlide" class="slider-button next">›</button>
   </div>
 </template>
+
 
 <style scoped>
 .slider {

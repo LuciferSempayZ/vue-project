@@ -7,7 +7,7 @@ onMounted(async () => {
   try {
     categories.value = await getCategory();
   } catch (error) {
-    console.error('ОАОАОА', error)
+    console.error('Ошибка при загрузке категорий', error); // Обработка ошибок
   }
 });
 </script>
@@ -18,7 +18,7 @@ onMounted(async () => {
     <ul>
         <!-- Ссылки на продукты по категориям -->
         <li v-for="category in categories" :key="category.id">
-          <RouterLink :to="`/categories/${category.id}`">{{ category.name }}</RouterLink> <!-- Ссылка на продукты по категории -->
+          <RouterLink :to="`/category/${category.id}`">{{ category.name }}</RouterLink> <!-- Ссылка на продукты по категории -->
         </li>
     </ul>
   </div>

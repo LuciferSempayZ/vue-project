@@ -1,35 +1,84 @@
-<script>
-import { ref, onMounted } from 'vue';
-import { getProductsByCategory } from '@/api/methods/categoryProducts/products.js'; // Импорт метода для загрузки продуктов по категории
+<script setup>
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { getProductsByCategory } from '@/api/methods/categoryProducts/products.js'; // Метод для загрузки продуктов по категории
+import { URL_PHOTO} from "@/config/index.js";
+import {getProductPhotos, getProducts} from "@/api/methods/categoryProducts/GetCategoryAndProducts.js";
+const route = useRoute();
+const categoryId = ref(route.params.id); // Получаем идентификатор категории из параметров маршрута
+const products = ref([]);
 
-export default {
-  data() {
-    return {
-      products: ref([]), // Реактивный массив для хранения продуктов
-    };
-  },
-  async created() {
-    try {
-      const categoryId = this.$route.params.categoryId; // Получаем ID категории из URL
-      this.products.value = await getProductsByCategory(categoryId); // Загружаем продукты по категории
-    } catch (error) {
-      console.error("Ошибка при загрузке продуктов по категории:", error); // Обработка ошибок
-    }
-  },
+onMounted(async () => {
+  try {
+    products.value = await getProductsByCategory(categoryId.value); // Загружаем товары по идентификатору категории
+  } catch (error) {
+    console.error('Ошибка при загрузке товаров', error);
+  }
+});
+const getPhotoURL = (photo) => {
+  return URL_PHOTO + photo;
 };
 </script>
 
 <template>
-  <div>
-    <h1>Продукты по категории {{ this.$route.params.categoryId }}</h1>
-    <!-- Отображение списка продуктов по категории -->
-    <ul v-if="products.value.length > 0">
-      <li v-for="product in products.value" :key="product.id">
-        <h3>{{ product.name }}</h3>
-        <p>Цена: {{ product.price }}</p>
+  <div class="category-list">
+    <h1>Продукты в категории {{ categoryId }}</h1>
+
+    <div class="product-grid">
+      <!-- Создаем карточку для каждого продукта -->
+      <div v-for="product in products" :key="product.id" class="product-card">
+        <img :src="getPhotoURL(product.photo)" alt="product.name" class="product-image" /> <!-- Изображение продукта -->
+        <h2>{{ product.name }}</h2>
         <p>{{ product.description }}</p>
-      </li>
-    </ul>
-    <div v-else>Нет продуктов по этой категории.</div> <!-- Если нет продуктов -->
+        <p class="product-price">{{ product.price }} ₽</p> <!-- Цена продукта -->
+        <!-- Добавляем кнопку для добавления в корзину -->
+        <button @click="addToCart(product)" class="add-to-cart-button">Добавить в корзину</button>
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.category-list {
+  padding: 20px;
+}
+
+.product-grid {
+  display: grid; /* Используем грид для расположения элементов */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Определяем колонки в гриде */
+  gap: 20px; /* Промежуток между элементами */
+}
+
+.product-card {
+  border: 1px solid #ddd; /* Обрамление для каждой карточки */
+  padding: 20px; /* Отступ внутри карточки */
+  text-align: center; /* Центрируем текст */
+  transition: box-shadow 0.3s ease; /* Анимация при наведении */
+}
+
+.product-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Тень при наведении */
+}
+
+.product-image {
+  max-width: 100%; /* Ограничиваем ширину изображения */
+  height: auto; /* Сохраняем соотношение сторон */
+}
+
+.product-price {
+  font-weight: bold; /* Жирный шрифт для цены */
+  color: #e63946; /* Цвет для цены */
+}
+
+.add-to-cart-button {
+  background-color: #457b9d; /* Синий цвет кнопки */
+  color: white; /* Белый цвет текста */
+  border: none; /* Убираем обрамление */
+  padding: 10px 20px; /* Отступы в кнопке */
+  cursor: pointer; /* Указатель при наведении */
+}
+
+.add-to-cart-button:hover {
+  background-color: #1d3557; /* Темно-синий при наведении */
+}
+</style>
