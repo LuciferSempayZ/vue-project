@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-
+import Button from "@/components/Button.vue";
 import { getProfile } from "@/api/methods/auth/profile.js";
 import router from "@/router/index.js";
 

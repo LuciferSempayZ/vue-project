@@ -3,13 +3,13 @@ import {reactive, ref} from "vue";
 
 import Form from "@/components/Form.vue";
 import FormItem from "@/components/FormItem.vue";
-
+import Button from "@/components/Button.vue"; // Импорт компонента
 import router from "@/router/index.js";
 import {authorization} from "@/api/methods/auth/authorization.js";
 import {useAuthStore} from "@/stores/auth.js";
 
 const { setToken } = useAuthStore()
-
+const enter = ref(''); // Инициализация переменной
 const inputData = reactive({
   email: '',
   password: '',
@@ -44,7 +44,7 @@ const onSubmit = async () => {
   }
 
   setToken?.(data?.token)
-  await router.push({ name: 'home' })
+  await router.push({ name: 'Profile' })
 }
 // const enter = async () => {
 //   router.push('/Profile'); // Перенаправляем на страницу входа или главную
