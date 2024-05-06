@@ -7,6 +7,8 @@ import Registration from "@/components/Registration.vue";
 import Profile from "@/components/Profile.vue";
 import CategoryList from "@/components/CategoryList.vue";
 import ProductCategories from "@/components/ProductCategories.vue";
+import News from "@/components/News.vue";
+import NewsGet from "@/components/NewsGet.vue";
 // Объявляем маршруты
 const routes = [
   {
@@ -38,6 +40,16 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/article/:id', // Маршрут, который принимает параметр `id`
+    name: 'article', // Имя маршрута
+    component: NewsGet, // Компонент, который отображает статью
+  },
+  {
+    path: '/news', // Маршрут для страницы с новостями
+    name: 'news',
+    component: News, // Убедитесь, что компонент импортирован
   },
   // {
   //   path: '/category/:categoryId',

@@ -37,6 +37,7 @@ watch(theme, (newTheme) => {
         <RouterLink to="/#gallery">Галерея</RouterLink>
 <!--        <RouterLink to="/basket">Корзина</RouterLink>-->
         <RouterLink to="/profile">Профиль</RouterLink>
+        <RouterLink to="/news">Новости</RouterLink> <!-- Блок для новостей -->
         <div class="auth-buttons">
           <RouterLink to="/Authorization"><button class="auth-button login-button">Войти</button></RouterLink>
           <RouterLink to="/Registration"><button class="auth-button register-button">Регистрация</button></RouterLink>

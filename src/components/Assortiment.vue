@@ -35,20 +35,20 @@ export default {
     <h1>Продукты</h1>
     <div class="slides" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <div v-for="product in products" :key="product.id" class="slide">
-        <!-- Проверка на "новый" или "хит продаж" -->
+        <!-- Лейблы "Новый" или "Хит продаж" -->
         <div class="product-labels">
-          <span v-if="product.new === 1" class="new-label">Новый</span>
-          <span v-if="product.bestseller === 1" class="bestseller-label">Хит продаж</span>
+          <span v-if="product.new === 1" class="product-label new">Новый</span>
+          <span v-if="product.bestseller === 1" class="product-label bestseller">Хит продаж</span>
         </div>
-        <img :src="URL_PHOTO() + product.photo" alt="pizza-photo" class="product-image">
+        <img :src="URL_PHOTO() + product.photo" alt="Фото продукта" class="product-image">
         <div class="review-pizza">
           <h3>{{ product.name }}</h3>
-          <p>Цена: {{ product.price }}₽ </p>
-          <blockquote><p>{{ product.description }}</p></blockquote>
+          <p>Цена: {{ product.price }} ₽</p>
+          <blockquote>{{ product.description }}</blockquote>
         </div>
       </div>
     </div>
-    <!-- Кнопки перехода -->
+    <!-- Кнопки для перехода между слайдами -->
     <button @click="prevSlide" class="slider-button prev">‹</button>
     <button @click="nextSlide" class="slider-button next">›</button>
   </div>
@@ -60,8 +60,7 @@ export default {
   position: relative;
   overflow: hidden;
   width: 100%; /* Слайдер занимает всю ширину */
-  height: 300px; /* Высота слайдера */
-  padding-bottom: 250px;
+  padding: 2rem 0; /* Внутренние отступы */
 }
 .slides {
   display: flex;
@@ -69,18 +68,18 @@ export default {
 }
 
 .slide {
-  display: flex; /* Используем Flexbox */
-  flex-direction: column; /* Расположение элементов вертикально */
+  display: flex;
+  flex-direction: column; /* Вертикальное расположение элементов */
   align-items: center; /* Центрирование по горизонтали */
   justify-content: center; /* Центрирование по вертикали */
   min-width: 100%; /* Каждый слайд занимает 100% ширины */
-  text-align: center;
 }
 
 .product-image {
   width: 300px;
   height: 210px;
 }
+
 
 .review-pizza {
   background: rgba(255, 255, 255, 0.52);
@@ -91,7 +90,22 @@ export default {
 blockquote {
   font-style: italic;
 }
-
+.new {
+  background-color: green; /* Цвет фона для лейбла "Новый" */
+}
+.product-labels {
+  display: flex;
+  gap: 0.5rem; /* Промежуток между лейблами */
+}
+.product-label {
+  padding: 0.3rem 0.6rem; /* Внутренние отступы */
+  border-radius: 8px; /* Закругленные края */
+  font-size: 0.8rem; /* Размер текста */
+  color: white; /* Цвет текста */
+}
+.bestseller {
+  background-color: orange; /* Цвет фона для лейбла "Хит продаж" */
+}
 .slider-button {
   position: absolute;
   top: 50%; /* Центрируем по вертикали */

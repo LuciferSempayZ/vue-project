@@ -6,7 +6,6 @@ import router from "@/router/index.js";
 
 // Переменная для хранения данных профиля
 const userProfile = ref(null);
-
 // Функция для загрузки данных профиля
 const loadUserProfile = async () => {
   try {
@@ -16,6 +15,21 @@ const loadUserProfile = async () => {
     userProfile.value = data; // Сохраняем данные
   } catch (error) {
     console.error("Ошибка при загрузке профиля:", error); // Обработка ошибок
+  }
+};
+// Функция для сохранения изменений профиля
+const saveProfile = async () => {
+  try {
+    await updateProfile({
+      surname: newProfileData.data.surname,
+      name: newProfileData.data.name,
+      email: newProfileData.data.email,
+      phone: newProfileData.data.phone,
+    });
+    console.log("Профиль успешно обновлен!");
+    loadUserProfile(); // Обновляем профиль после сохранения
+  } catch (error) {
+    console.error("Ошибка при сохранении профиля:", error); // Обработка ошибок
   }
 };
 // Функция для выхода из профиля
@@ -32,6 +46,7 @@ const logout = () => {
 onMounted(() => {
   loadUserProfile(); // Загружаем данные при монтировании
 });
+
 </script>
 
 <template>
