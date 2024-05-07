@@ -43,3 +43,15 @@ export const getArticleById = async (id) => {
         throw error; // Перебрасываем ошибку для обработки
     }
 };
+export const addArticle = async (article) => {
+    try {
+        const response = await makeRequest('/articles', 'POST', JSON.stringify(article)); // Запрос на добавление новой статьи
+        if (!response.ok) {
+            throw new Error(`Ошибка при добавлении статьи: ${response.statusText}`);
+        }
+        return await response.json(); // Возвращаем созданную статью
+    } catch (error) {
+        console.error("Ошибка при добавлении статьи:", error);
+        throw error; // Обработка ошибки
+    }
+};

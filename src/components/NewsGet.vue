@@ -107,14 +107,12 @@ export default {
   margin: 20px auto; /* Центрирование с отступом */
   padding: 2rem; /* Внутренние отступы */
   border-radius: 10px; /* Закругленные края */
-  background-color: #f5f5f5; /* Светлый фон */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Легкая тень */
 }
 
 .article-content {
   font-size: 1.1rem; /* Размер шрифта */
   line-height: 1.6; /* Пространство между строками */
-  color: #333; /* Темный цвет текста */
 }
 
 button {

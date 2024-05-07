@@ -10,10 +10,6 @@ function orderNow() {
     <!-- Главный баннер -->
     <div class="hero">
       <h1>Добро пожаловать в Пиццерию "Bella Pizza"</h1>
-      <div class="border-hero">
-        <p>Лучшая пицца в городе</p>
-        <button @click="orderNow">Заказать сейчас</button>
-      </div>
     </div>
   </div>
 </template>

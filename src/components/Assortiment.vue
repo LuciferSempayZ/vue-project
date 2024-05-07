@@ -2,13 +2,16 @@
 import { ref } from 'vue';
 import { getProducts, getProductPhotos } from '@/api/methods/categoryProducts/GetCategoryAndProducts.js';
 import { URL_PHOTO} from "@/config/index.js";
+import { addToCartBackend} from "@/stores/cart.js"; // Функция для добавления в корзину через backend
+
+export const cart = ref([]); // Инициализация корзины как пустого массива
 
 export default {
   data() {
     return {
       products: [],
       photos: [],
-      currentSlide: 0, // Индекс текущего слайда
+      currentSlide: 0,
     };
   },
   async created() {
@@ -16,17 +19,26 @@ export default {
     this.photos = await getProductPhotos();
   },
   methods: {
+    async addToCart(productId) {
+      try {
+        const result = await addToCartBackend(productId, 1);
+        console.log("Добавлено в корзину:", result);
+      } catch (error) {
+        console.error("Ошибка при добавлении в корзину:", error);
+      }
+    },
     URL_PHOTO() {
-      return URL_PHOTO
+      return URL_PHOTO;
     },
     nextSlide() {
-      this.currentSlide = (this.currentSlide + 1) % this.products.length; // Переход к следующему слайду
+      this.currentSlide = (this.currentSlide + 1) % this.products.length;
     },
     prevSlide() {
-      this.currentSlide = (this.currentSlide - 1 + this.products.length) % this.products.length; // Переход к предыдущему слайду
+      this.currentSlide = (this.currentSlide - 1 + this.products.length) % this.products.length;
     },
   },
 };
+
 
 </script>
 
@@ -45,6 +57,8 @@ export default {
           <h3>{{ product.name }}</h3>
           <p>Цена: {{ product.price }} ₽</p>
           <blockquote>{{ product.description }}</blockquote>
+          <!-- Используем метод добавления в корзину -->
+          <button @click="addToCart(product.id)">Добавить в корзину</button>
         </div>
       </div>
     </div>
@@ -92,6 +106,7 @@ blockquote {
 }
 .new {
   background-color: green; /* Цвет фона для лейбла "Новый" */
+  width: 100px;
 }
 .product-labels {
   display: flex;
@@ -105,6 +120,7 @@ blockquote {
 }
 .bestseller {
   background-color: orange; /* Цвет фона для лейбла "Хит продаж" */
+  width: 100px;
 }
 .slider-button {
   position: absolute;
@@ -130,5 +146,19 @@ blockquote {
 
 .slider-button.next {
   right: 33%; /* Расположить ближе к центру */
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Темнее при наведении */
 }
 </style>
