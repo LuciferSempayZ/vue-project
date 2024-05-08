@@ -49,7 +49,7 @@ export default {
       <div v-for="product in products" :key="product.id" class="slide">
         <!-- Лейблы "Новый" или "Хит продаж" -->
         <div class="product-labels">
-          <span v-if="product.new === 1" class="product-label new">Новый</span>
+          <span v-if="product.new === 1" class="product-label new">Новинка</span>
           <span v-if="product.bestseller === 1" class="product-label bestseller">Хит продаж</span>
         </div>
         <img :src="URL_PHOTO() + product.photo" alt="Фото продукта" class="product-image">
@@ -78,15 +78,15 @@ export default {
 }
 .slides {
   display: flex;
-  transition: transform 0.5s ease-in-out; /* Плавный переход */
+  transition: transform 0.7s ease-in-out; /* Плавный переход */
 }
 
 .slide {
   display: flex;
-  flex-direction: column; /* Вертикальное расположение элементов */
-  align-items: center; /* Центрирование по горизонтали */
-  justify-content: center; /* Центрирование по вертикали */
-  min-width: 100%; /* Каждый слайд занимает 100% ширины */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
 }
 
 .product-image {
@@ -97,29 +97,29 @@ export default {
 
 .review-pizza {
   background: rgba(255, 255, 255, 0.52);
-  padding: 1rem; /* Внутренний отступ */
-  border-radius: 8px; /* Закругление краев */
-  width: 300px; /* Ширина блока */
+  padding: 1rem;
+  border-radius: 8px;
+  width: 300px;
 }
 blockquote {
   font-style: italic;
 }
 .new {
-  background-color: green; /* Цвет фона для лейбла "Новый" */
+  border: 2px solid red;
   width: 100px;
 }
 .product-labels {
   display: flex;
-  gap: 0.5rem; /* Промежуток между лейблами */
+  gap: 0.5rem;
 }
 .product-label {
-  padding: 0.3rem 0.6rem; /* Внутренние отступы */
-  border-radius: 8px; /* Закругленные края */
-  font-size: 0.8rem; /* Размер текста */
-  color: white; /* Цвет текста */
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: white;
 }
 .bestseller {
-  background-color: orange; /* Цвет фона для лейбла "Хит продаж" */
+  border: 2px solid orange;
   width: 100px;
 }
 .slider-button {

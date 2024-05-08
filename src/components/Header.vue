@@ -53,24 +53,12 @@ onMounted(loadCart); // Загружаем корзину при монтиро�
         <RouterLink to="/#gallery">Галерея</RouterLink>
         <RouterLink to="/profile">Профиль</RouterLink>
         <RouterLink to="/news">Новости</RouterLink> <!-- Блок для новостей -->
-        <button @click="toggleCart">Корзина ({{ cart.value }})</button> <!-- Показываем количество товаров в корзине -->
+        <RouterLink to="/cart" class="cart-link">Корзина ({{ cart.value }})</RouterLink>
         <div class="auth-buttons">
           <RouterLink to="/Authorization"><button class="auth-button login-button">Войти</button></RouterLink>
           <RouterLink to="/Registration"><button class="auth-button register-button">Регистрация</button></RouterLink>
         </div>
       </nav>
-    </div>
-    <!-- Выпадающее меню для отображения корзины -->
-    <div class="cart-dropdown" v-if="showCart">
-      <div>
-        <h2>Корзина</h2>
-        <ul>
-          <li v-for="item in cart.value" :key="item.id">
-            {{ item.name }} - {{ item.count }}
-          </li>
-        </ul>
-        <div v-if="cart.length === 0">Корзина пуста.</div> <!-- Если корзина пуста -->
-      </div>
     </div>
   </header>
 </template>
@@ -153,15 +141,17 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-.cart-dropdown {
-  position: absolute; /* Убедитесь, что корзина находится в правильном месте */
-  top: 100px; /* Положение относительно элемента */
-  right: 50px; /* Расположение корзины */
-  background-color: white; /* Фон корзины */
-  border: 1px solid #ccc; /* Граница корзины */
-  border-radius: 5px; /* Округление краев */
-  padding: 1rem; /* Отступы внутри корзины */
-  width: 500px;
-  height: 500px;
+.cart-link {
+  text-decoration: none;
+  color: white; /* Цвет текста для корзины */
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background: linear-gradient(to right, #2196F3, #21CBF3); /* Градиент для кнопки */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cart-link:hover {
+  background-color: #1976D2; /* Темный фон при наведении */
 }
 </style>

@@ -27,15 +27,15 @@ onMounted(loadNews); // Загружаем новости при монтиро�
 <template>
   <div class="news-container">
     <h1>Новости</h1>
-    <ul>
+    <ul class="news-list">
       <li v-for="article in articles" :key="article.id" class="news-item">
         <h3>{{ article.title }}</h3>
         <p>{{ article.description.substring(0, 170) }}...</p>
         <p>{{ article.date }}</p>
-        <RouterLink :to="{ name: 'article', params: { id: article.id} }">Подробнее</RouterLink>
+        <RouterLink :to="{ name: 'article', params: { id: article.id } }" class="details-link">Подробнее</RouterLink>
       </li>
     </ul>
-    <!-- Форма для добавления новой новости -->
+
     <!-- Форма для добавления новой новости -->
     <div class="add-article">
       <h2>Добавить новость</h2>
@@ -69,11 +69,39 @@ onMounted(loadNews); // Загружаем новости при монтиро�
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
+  background: linear-gradient(to right, #7b7e85, #6a8ab0);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
 }
 
 .news-item {
-  border-bottom: 1px solid #ccc;
   padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.news-item h3 {
+  color: #333;
+}
+
+.details-link {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background: linear-gradient(to right, #2196F3, #21CBF3); /* Градиент для кнопки */
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для эффекта */
+  transition: all 0.3s ease;
+}
+
+.details-link:hover {
+  background-color: #1976D2; /* Темнее при наведении */
+  text-decoration: underline; /* Подчеркивание при наведении */
 }
 
 .add-article {
@@ -92,44 +120,22 @@ onMounted(loadNews); // Загружаем новости при монтиро�
 input,
 textarea {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
   border-radius: 5px;
 }
 
 .submit-button {
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: 5px;
-  background-color: #99a5ad;
+  background: linear-gradient(to right, #4caf50, #81c784);
   color: white;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #59c254;
-}
-.news-container {
-  max-width: 800px;
-  margin: 0 auto; /* Центрирование */
-  padding: 2rem; /* Внутренние отступы */
-}
-
-.news-item {
-  border-bottom: 1px solid #ccc; /* Разделительная линия */
-  padding: 1rem; /* Внутренние отступы */
-}
-
-button {
-  padding: 0.5rem 1rem; /* Внутренние отступы */
-  border-radius: 5px; /* Закругление краев */
-  border: none; /* Убираем обводку */
-  cursor: pointer; /* Указатель мыши */
-  transition: all 0.3s ease; /* Плавный переход */
-}
-
-button:hover {
-  background-color: #f5f5f5; /* Светло-серый фон при наведении */
+  background-color: #66bb6a;
 }
 </style>

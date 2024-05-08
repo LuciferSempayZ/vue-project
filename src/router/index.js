@@ -9,6 +9,7 @@ import CategoryList from "@/components/CategoryList.vue";
 import ProductCategories from "@/components/ProductCategories.vue";
 import News from "@/components/News.vue";
 import NewsGet from "@/components/NewsGet.vue";
+import Cart from "@/components/Cart.vue";
 // Объявляем маршруты
 const routes = [
   {
@@ -67,6 +68,11 @@ const routes = [
      component: CategoryList,
      props: true, // Передача параметра в качестве свойства компонента
    },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
+  },
 ];
 
 // Создаём экземпляр маршрутизатора
