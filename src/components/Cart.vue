@@ -1,57 +1,42 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { getCart, removeFromCart, clearCart } from '@/stores/cart.js'; // Импортируем функции работы с корзиной
-
+import {onMounted, reactive, ref} from 'vue';
+import {getCart} from '@/stores/cart.js'; // Функции работы с корзиной
+import { URL_PHOTO} from "@/config/index.js";
 const cart = ref([]); // Реактивное хранилище для корзины
+const cartItems = reactive({
+  total: 0,
+  items: []
+})
 
-// Функция для загрузки содержимого корзины
+const showCart = ref(false); // Флаг для отображения корзины
+const toggleCart = () => {
+  console.log('Корзина переключается', showCart.value);
+  showCart.value = !showCart.value; // Переключаем видимость корзины
+};
+// Функция для получения содержимого корзины
 const loadCart = async () => {
   try {
-    const data = await getCart(); // Загружаем данные о корзине из API
-    console.log("Данные корзины:", data); // Проверяем загруженные данные
-    cart.value = data; // Обновляем значение корзины
+    cartItems.items = await getCart()
+    console.log(cartItems.items)
   } catch (error) {
     console.error("Ошибка при загрузке корзины:", error);
   }
 };
 
-
-// Функция для удаления товара из корзины
-const deleteFromCart = async (productId) => {
-  try {
-    await removeFromCart(productId); // Удаляем товар из корзины
-    await loadCart(); // Обновляем корзину
-  } catch (error) {
-    console.error("Ошибка при удалении из корзины:", error);
-  }
-};
-
-// Функция для очистки всей корзины
-const clearAllCart = async () => {
-  try {
-    await clearCart(); // Очищаем корзину
-    await loadCart(); // Обновляем корзину
-  } catch (error) {
-    console.error("Ошибка при очистке корзины:", error);
-  }
-};
-
-onMounted(loadCart); // Загружаем содержимое корзины при монтировании
+onMounted(loadCart); // Загружаем корзину при монтировании
 </script>
 
 <template>
   <div class="cart-container">
     <h1>Корзина</h1>
     <ul class="cart-list">
-      <li v-for="item in cart.value" :key="item.id" class="cart-item">
-        <span>{{ item.name }}</span> <!-- Название товара -->
+      <li class="" v-for="item in cartItems.items" :key="item.id">
+        <h3 class="product">{{ item.product }}</h3>
+        <span>{{ item.id }}</span> <!-- Название товара -->
         <span>{{ item.count }}</span> <!-- Количество -->
         <span>{{ item.price }} ₽</span> <!-- Цена -->
-        <button @click="deleteFromCart(item.id)">Удалить</button> <!-- Кнопка удаления -->
       </li>
     </ul>
-    <div v-if="cart.value && cart.value.length === 0">Корзина пуста</div>
-    <button @click="clearAllCart" v-if="cart.value > 0">Очистить корзину</button> <!-- Очистить всю корзину -->
   </div>
 </template>
 
@@ -87,19 +72,5 @@ onMounted(loadCart); // Загружаем содержимое корзины �
 
 .cart-item button:hover {
   background-color: #d43f3f; /* Более темный красный при наведении */
-}
-
-button {
-  padding: 0.7rem 1.2rem;
-  border-radius: 5px;
-  background: linear-gradient(to right, #4caf50, #81c784); /* Градиент для кнопки */
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #66bb6a; /* Темный фон при наведении */
 }
 </style>
