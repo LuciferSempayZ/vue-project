@@ -34,7 +34,6 @@ onMounted(loadCart); // Загружаем корзину при монтиро�
         <h3 class="product">{{ item.product }}</h3>
         <span>{{ item.id }}</span> <!-- Название товара -->
         <span>{{ item.count }}</span> <!-- Количество -->
-        <span>{{ item.price }} ₽</span> <!-- Цена -->
       </li>
     </ul>
   </div>
