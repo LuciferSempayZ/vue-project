@@ -52,7 +52,7 @@ onMounted(async () => {
       <li v-for="article in articles" :key="article.id" class="news-item">
         <div class="news-image">
           <img v-if="article.photos.length > 0" v-for="photo in article.photos" :src="URL_PHOTO + photo.photo" :alt="photo.alt" class="news-photo"/>
-          <img v-else src="/src/assets/none.jpg" alt="No photo available" class="news-photo" />
+          <img v-else src="" alt="No photo available" class="news-photo" />
         </div>
         <h3>{{ article.title }}</h3>
         <p class="news-date">{{ formatDate(article.created_at) }}</p>

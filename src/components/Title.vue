@@ -9,7 +9,7 @@ function orderNow() {
   <div class="homepage">
     <!-- Главный баннер -->
     <div class="hero">
-      <h1>Добро пожаловать в Пиццерию "Bella Pizza"</h1>
+      <h1>Добро пожаловать в Пиццерию "MarioPizza"</h1>
     </div>
   </div>
 </template>

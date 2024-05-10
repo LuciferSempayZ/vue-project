@@ -19,42 +19,39 @@ const isLoading = ref(false)
 
 const errors = reactive({
   data: {},
-  message: ''
-})
+  message: '',
+});
 
 const onSubmit = async () => {
-  isLoading.value = true
+  isLoading.value = true;
 
-  errors.message = ''
-  errors.data = {}
-  const data = await authorization(inputData.email, inputData.password)
+  errors.message = '';
+  errors.data = {};
 
-  isLoading.value = false
+  const data = await authorization(inputData.email, inputData.password);
 
-  console.log(data)
-
-  if (data?.code === 422) {
-    errors.data = data.message
-    return
-  }
+  isLoading.value = false;
 
   if (data?.code === 401) {
-    errors.data = data.message
-    return
+    errors.message = "Неправильный пароль.";
+    return;
   }
 
-  setToken?.(data?.token)
-  await router.push({ name: 'Profile' })
-}
-// const enter = async () => {
-//   router.push('/Profile'); // Перенаправляем на страницу входа или главную
-// };
-const onInputChange = (field, event) => {
-  const value = event.target.value
+  if (data?.code === 404) {
+    errors.message = "Такой почты не существует.";
+    return;
+  }
 
-  errors.data[field] = []
-  inputData[field] = value
-}
+  setToken?.(data?.token);
+  await router.push({ name: 'Profile' });
+};
+
+const onInputChange = (field, event) => {
+  const value = event.target.value;
+
+  errors.data[field] = [];
+  inputData[field] = value;
+};
 </script>
 
 <template>
