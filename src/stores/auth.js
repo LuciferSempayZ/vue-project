@@ -14,3 +14,12 @@ export const useAuthStore = defineStore('auth', () => {
     token
   }
 })
+export const isAuthenticated = ref(false); // Состояние авторизации
+
+export const login = () => {
+  isAuthenticated.value = true; // Авторизация
+};
+
+export const logout = () => {
+  isAuthenticated.value = false; // Выход из авторизации
+};

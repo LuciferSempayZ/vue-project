@@ -1,17 +1,28 @@
 import { makeRequest } from "@/api/makeRequest"; // Функция для выполнения API-запросов
 
-export const updateProfile = async (profileData) => {
-    try {
-        // Запрос к API для обновления данных профиля
-        const response = await makeRequest('/profile', 'PUT', JSON.stringify(profileData)); // Используем PUT-запрос
+export const updateProfile = async (updatedFields) => {
+// Создаем объект для хранения измененных данных
+    const requestBody = {};
 
-        if (!response.ok) {
-            throw new Error(`Ошибка при обновлении профиля: ${response.statusText}`); // Если запрос не успешен
-        }
-
-        return await response.json(); // Возвращаем результат в виде JSON
-    } catch (error) {
-        console.error("Ошибка при обновлении профиля:", error); // Обработка ошибок
-        throw error; // Возвращаем ошибку, чтобы вызвать обработку в вызывающем коде
+// Добавляем только те поля, которые изменились
+    for (const key in updatedFields) {
+        requestBody[key] = updatedFields[key];
     }
+
+// Проверяем, есть ли изменения
+    if (Object.keys(requestBody).length === 0) {
+// Нет изменений, возвращаем пустой объект
+        return {};
+    }
+
+// Отправляем запрос только если есть изменения
+    const response = await makeRequest(
+        '/profile',
+        'POST',
+        JSON.stringify(requestBody)
+    );
+
+    return response.json();
 };
+
+

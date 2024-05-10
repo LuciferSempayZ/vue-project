@@ -17,21 +17,7 @@ const loadUserProfile = async () => {
     console.error("Ошибка при загрузке профиля:", error); // Обработка ошибок
   }
 };
-// Функция для сохранения изменений профиля
-const saveProfile = async () => {
-  try {
-    await updateProfile({
-      surname: newProfileData.data.surname,
-      name: newProfileData.data.name,
-      email: newProfileData.data.email,
-      phone: newProfileData.data.phone,
-    });
-    console.log("Профиль успешно обновлен!");
-    loadUserProfile(); // Обновляем профиль после сохранения
-  } catch (error) {
-    console.error("Ошибка при сохранении профиля:", error); // Обработка ошибок
-  }
-};
+
 // Функция для выхода из профиля
 const logout = () => {
   // Присваиваем токену пустое значение
@@ -40,15 +26,17 @@ const logout = () => {
   // Перенаправляем на страницу авторизации
   router.push('/authorization');
 };
+// Переход на страницу изменения профиля
+const goToEditProfile = () => {
+  router.push('/edit-profile'); // Перенаправляем на страницу редактирования профиля
+};
 
 // Загружаем данные профиля при монтировании компонен
-// та
 onMounted(() => {
   loadUserProfile(); // Загружаем данные при монтировании
 });
 
 </script>
-
 <template>
   <div class="profile-container">
     <h2>Профиль пользователя</h2>
@@ -63,7 +51,10 @@ onMounted(() => {
     <div v-else>
       <p>Загрузка данных...</p>
     </div>
+    <div class="buttons-class">
+    <button @click="goToEditProfile" class="edit-button">Изменить профиль</button> <!-- Кнопка редактирования -->
     <button @click="logout" class="logout-button">Выйти</button>
+    </div>
   </div>
 </template>
 
@@ -74,6 +65,27 @@ onMounted(() => {
   padding: 2rem; /* Внутренние отступы */
   border-radius: 10px; /* Закругленные края */
   background-color: #7c7373; /* Цвет фона */
+}
+.buttons-class {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 50%;
+  padding-left: 100px;
+}
+.edit-button {
+  margin-top: 1rem; /* Отступ сверху */
+  padding: 0.5rem 1rem; /* Внутренние отступы */
+  border: none;
+  border-radius: 5px;
+  background-color: #13ce31; /* Красный фон */
+  color: white;
+  cursor: pointer; /* Указатель мыши */
+  transition: all 0.3s ease; /* Плавный переход */
+}
+
+.edit-button:hover {
+  background-color: #66bb6a; /* Темнее при наведении */
 }
 .profile-container p {
   color: white;

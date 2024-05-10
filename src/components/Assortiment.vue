@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { getProducts, getProductPhotos } from '@/api/methods/categoryProducts/GetCategoryAndProducts.js';
 import { URL_PHOTO} from "@/config/index.js";
 import { addToCartBackend} from "@/stores/cart.js"; // Функция для добавления в корзину через backend
+import { isAuthenticated } from "@/stores/auth.js"; // Импортируем флаг авторизации
 
 export const cart = ref([]); // Инициализация корзины как пустого массива
 
@@ -20,6 +21,10 @@ export default {
   },
   methods: {
     async addToCart(productId) {
+      if (!isAuthenticated.value) {
+        alert("Чтобы добавить в корзину, необходимо войти или зарегистрироваться.");
+        return; // Если пользователь не авторизован, показываем предупреждение
+      }
       try {
         const result = await addToCartBackend(productId, 1);
         console.log("Добавлено в корзину:", result);

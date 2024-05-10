@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { getArticleById, updateArticle, deleteArticle } from '@/api/methods/getnews/news.js';
 import { useRoute, useRouter } from 'vue-router'; // Для навигации и получения параметра маршрута
+import {URL_PHOTO} from "@/config/index.js";
 
 export default {
   data() {

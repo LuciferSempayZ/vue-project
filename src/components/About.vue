@@ -59,14 +59,7 @@
       <!-- Уникальные Предложения -->
       <div class="section">
         <h2>Уникальные Предложения</h2>
-        <p>
-          Мы гордимся нашим ассортиментом пиццы. У нас есть классические варианты, такие как "Маргарита" и "Пепперони",
-          но мы также создаем уникальные пиццы, которые вы найдете только у нас. Попробуйте нашу фирменную "Bella
-          Special", которая сочетает в себе сладкие и острые ингредиенты, или "Тропическую", с сочными кусочками ананаса
-          и ветчины.
-        </p>
       </div>
-
       <p>Приходите в "MarioPizza", чтобы попробовать нашу вкусную пиццу и стать частью нашей дружной семьи. Мы ждем вас!</p>
     </div>
   </section>
@@ -74,13 +67,13 @@
 
 <style scoped>
 .about-section {
-  background-size: cover; /* Изображение покрывает весь фон */
-  background-position: center; /* Центрируем изображение */
-  background-repeat: no-repeat; /* Избегаем повторений изображения */
-  background-attachment: fixed; /* Фиксированный фон при прокрутке */
-  padding: 2rem; /* Добавляем отступы внутри секции */
-  color: #ffffff; /* Устанавливаем белый цвет текста для контраста */
-  font-family: 'Roboto Light', sans-serif; /* Выбор шрифта */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 2rem;
+  color: #ffffff;
+  font-family: 'Roboto Light', sans-serif;
 }
 
 .container {

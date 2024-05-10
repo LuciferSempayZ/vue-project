@@ -32,8 +32,17 @@ export const getCart = async () => {
     }
 };
 
-const removeFromCart = (productId) => {
-    cart.value = cart.value.filter((item) => item.product_id !== productId);
+export const removeFromCartBackend = async (productId) => {
+    try {
+        const response = await makeRequest(`/carts/${productId}`, 'DELETE'); // Удаление товара
+        if (!response.ok) {
+            throw new Error(`Ошибка при удалении товара: ${response.statusText}`);
+        }
+        return true; // Если запрос успешен
+    } catch (error) {
+        console.error("Ошибка при удалении товара из корзины:", error);
+        throw error; // Обработка ошибки
+    }
 };
 
 const clearCart = () => {
@@ -41,4 +50,4 @@ const clearCart = () => {
 };
 
 // Экспортируем функции и корзину
-export { cart, removeFromCart, clearCart };
+export { cart, clearCart };

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import SliderPhotoPizza from '@/components/SliderPhotoPizza.vue';
 import About from "@/components/About.vue";
 import Authorization from "@/components/Authorization.vue";
 import Registration from "@/components/Registration.vue";
@@ -10,17 +9,14 @@ import ProductCategories from "@/components/ProductCategories.vue";
 import News from "@/components/News.vue";
 import NewsGet from "@/components/NewsGet.vue";
 import Cart from "@/components/Cart.vue";
+import EditProfile from "@/components/EditProfile.vue";
+import { isAuthenticated } from '@/stores/auth.js'; // Импортируем флаг авторизации
 // Объявляем маршруты
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: HomeView,
-  },
-  {
-    path: '/Slider',
-    name: 'Slider',
-    component: SliderPhotoPizza,
   },
   {
     path: '/About',
@@ -73,6 +69,11 @@ const routes = [
     name: 'Cart',
     component: Cart,
   },
+  {
+    path: '/edit-profile',
+    name: 'Edit-profile',
+    component: EditProfile
+  }
 ];
 
 // Создаём экземпляр маршрутизатора

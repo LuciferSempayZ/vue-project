@@ -1,7 +1,7 @@
 <script setup>
 
 import {RouterLink} from "vue-router";
-import {cart, getCart, removeFromCart} from '@/stores/cart'; // Импортируем корзину и функцию удаления
+import {cart, getCart, removeFromCartBackend} from '@/stores/cart'; // Импортируем корзину и функцию удаления
 import {onMounted, ref, watch} from "vue";
 // Метод для переключения темы
 const theme = ref('light'); // По умолчанию светлая тема
@@ -50,7 +50,6 @@ onMounted(loadCart); // Загружаем корзину при монтиро�
         <RouterLink to="/#about">О нас</RouterLink>
         <RouterLink to="/#category">Категории</RouterLink>
         <RouterLink to="/#pizza-block">Продукты</RouterLink>
-        <RouterLink to="/#gallery">Галерея</RouterLink>
         <RouterLink to="/profile">Профиль</RouterLink>
         <RouterLink to="/news">Новости</RouterLink> <!-- Блок для новостей -->
         <RouterLink to="/cart" class="cart-link">Корзина ({{ cart.value }})</RouterLink>
