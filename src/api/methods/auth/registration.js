@@ -1,17 +1,17 @@
 import {makeRequest} from "@/api/makeRequest.js";
 
-export const registration = async (email, password, name, surname, phone) => {
+export const registration = async (surname, name, password, email, phone) => {
     const response = await makeRequest(
         '/register',
         'POST',
         JSON.stringify({
-            email,
-            password,
-            name,
             surname,
+            name,
+            password,
+            email,
             phone
         })
     )
-
     return response.json()
 }
+

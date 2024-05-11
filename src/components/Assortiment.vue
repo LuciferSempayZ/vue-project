@@ -21,13 +21,10 @@ export default {
   },
   methods: {
     async addToCart(productId) {
-      if (!isAuthenticated.value) {
-        alert("Чтобы добавить в корзину, необходимо войти или зарегистрироваться.");
-        return; // Если пользователь не авторизован, показываем предупреждение
-      }
       try {
         const result = await addToCartBackend(productId, 1);
         console.log("Добавлено в корзину:", result);
+        alert("Товар успешно добавлен в корзину")
       } catch (error) {
         console.error("Ошибка при добавлении в корзину:", error);
       }

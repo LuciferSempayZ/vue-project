@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref} from "vue";
+import {reactive, ref, watch} from "vue";
 
 import Form from "@/components/Form.vue";
 import FormItem from "@/components/FormItem.vue";
@@ -22,6 +22,8 @@ const errors = reactive({
   message: '',
 });
 
+const successMessage = ref('');
+
 const onSubmit = async () => {
   isLoading.value = true;
 
@@ -33,17 +35,17 @@ const onSubmit = async () => {
   isLoading.value = false;
 
   if (data?.code === 401) {
-    errors.message = "Неправильный пароль.";
-    return;
+    alert('Неверный пароль');
   }
 
   if (data?.code === 404) {
-    errors.message = "Такой почты не существует.";
-    return;
+    alert('Такой почты не существует');
   }
 
   setToken?.(data?.token);
   await router.push({ name: 'Profile' });
+
+  alert('Вы успешно вошли в систему');
 };
 
 const onInputChange = (field, event) => {
@@ -54,11 +56,10 @@ const onInputChange = (field, event) => {
 };
 </script>
 
+
 <template>
   <main>
     <h1>Вход</h1>
-
-
     <Form :submit="onSubmit" method="POST">
       <h3 v-if="errors.message">Неправильные данные для входа</h3>
       <p v-if="isLoading">Загрузка...</p>
@@ -89,3 +90,16 @@ const onInputChange = (field, event) => {
     </Form>
   </main>
 </template>
+<style>
+.success-message {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+</style>
